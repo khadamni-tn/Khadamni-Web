@@ -1,0 +1,49 @@
+.signInBox{
+    width: 30%; 
+    margin-top: 5%;
+    margin-left: 35%;
+    border-width:1px;
+    border-style: solid;
+    border-color: #ededed;
+    
+}
+.title{
+    
+    background-color: #ededed;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5%;
+    
+}
+.credentiels {
+    display: flex;
+    flex-direction: column;
+    margin-left: 5%;
+    margin-bottom: 5%;
+    width: 60%;
+    font-size: 15px;
+
+}
+
+.bottom {
+    width: 25%;
+    margin-left: 30%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.errmsg{
+    font-size: medium;
+    color: red;
+
+}
+
+.hidden{
+    display: none;
+}
+.errorMessage{
+    display: flex;
+    justify-content: center;
+    
+}

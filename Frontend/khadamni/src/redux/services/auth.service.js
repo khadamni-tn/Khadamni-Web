@@ -31,7 +31,7 @@ const login = async ({user, pwd}) => {
        
   
     try {
-      console.log("test")
+      console.log("testss")
         const response = await axios.post(API_URL + "auth",
             JSON.stringify({ user, pwd }),
             {

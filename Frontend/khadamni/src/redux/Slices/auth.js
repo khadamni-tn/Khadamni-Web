@@ -13,8 +13,9 @@ export const register = createAsyncThunk(
         console.log(user, pwd);
         const response = await AuthService.register({user, pwd});
         console.log(response);
+        console.log("response");
         thunkAPI.dispatch(setMessage(response.data.message));
-        navigate("/Dashboard")
+        
         return response.data;
       } catch (error) {
         const message =

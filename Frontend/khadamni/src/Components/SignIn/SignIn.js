@@ -13,12 +13,13 @@ import { login } from "../../redux/Slices/auth";
 import { clearMessage } from "../../redux/Slices/message";
 import { Link } from "react-router-dom";
 import ProfileAppBar from "../Dashboard/profileAppBar"
+import SignInStyle from './SignIn.module.css'; 
 
 
 
  const  SignIn = (props) => {
     
-   
+
 
     const LOGIN_URL = '/auth';
     const [loading, setLoading] = useState(false);
@@ -59,7 +60,7 @@ const  handleSubmit = async () => {
 
     
         console.log("test")
-          const response = await axios.post("localhost:3500/api/auth/",
+          const response = await axios.post("http://localhost:3500/auth",
               { user, pwd },
               {
                   headers: { 'Content-Type': 'application/json' },
@@ -67,43 +68,49 @@ const  handleSubmit = async () => {
               }
           );
           console.log(response)
+          
   
   const accessToken = response.data.accessToken;
   const roles = response.data.roles;
-//   setAuth({ user, pwd, roles, accessToken });
-//   setUser('');
-//   setPwd('');
-//   setSuccess(true)
-  console.log("======")
+  
+  console.log(accessToken)
+  
+  if (accessToken != null) {
+    
+    navigate ("/Dashboard")    
+    
+  }
   }
    catch (err) {
-  console.log(err)
-}}
+    setSuccess(false);
+    setErrMsg("Incorrect username or password");
+}
 
-  if (isLoggedIn) {
-    return <Navigate to="/Dashboard" />;
-  }
+
+}
+
+
+  
 
   return (
     <>
     
-        {success ? (
+         
+
             <section>
-                <h1>You are logged in!</h1>
-                <br />
-                <p>
-                    <a href="#">Go to Home</a>
-                </p>
-            </section>
-        ) : (
-            <section>
-                <ProfileAppBar/>
-                <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-                
+                    <ProfileAppBar/>
+
+            <div className={SignInStyle.signInBox}>
+               <div className={SignInStyle.title}>
                 <h1>Sign In</h1>
+                </div> 
+               <div className={SignInStyle.errorMessage}>
+                  <p ref={errRef} className={SignInStyle.errmsg}>{errMsg}</p>
+               </div> 
                 <div >
-                    <label htmlFor="username">Username:</label>
-                    <input
+                    <div className={SignInStyle.credentiels}>
+                        <label htmlFor="username">Username:</label>
+                        <input
                         type="text"
                         id="username"
                         ref={userRef}
@@ -111,18 +118,22 @@ const  handleSubmit = async () => {
                         onChange={(e) => setUser(e.target.value)}
                         value={user}
                         required
-                    />
-
+                          />
+                    </div>
+                    <div className={SignInStyle.credentiels}>
                     <label htmlFor="password">Password:</label>
-                    <input
+                    <input 
                         type="password"
                         id="password"
                         onChange={(e) => setPwd(e.target.value)}
                         value={pwd}
                         required
                     />
-                    <button onClick={handleSubmit}>Sign In</button>
+                    </div>
+
                 </div>
+                <div className={SignInStyle.bottom}>    
+                <button  onClick={handleSubmit}>Sign In</button>
                 <p>
                     Need an Account?<br />
                     <span className="line">
@@ -130,8 +141,11 @@ const  handleSubmit = async () => {
                         <Link to="/SignUp">Sign Up</Link>
                     </span>
                 </p>
+                </div>
+                </div>
             </section>
-        )}
+        
+       
     </>
 )
 }

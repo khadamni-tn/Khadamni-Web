@@ -94,7 +94,7 @@ const ProfileAppBar = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="" src="C:\Users\user\Desktop\Khadouj.jpg" />
+                <Avatar alt=""  />
               </IconButton>
             </Tooltip>
             <Menu
