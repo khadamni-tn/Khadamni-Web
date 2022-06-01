@@ -4,8 +4,7 @@ import { setMessage } from "./message";
 
 import AuthService from "../services/auth.service";
 
-const user = JSON.parse(localStorage.getItem("user"));
-
+const user = "";
 export const register = createAsyncThunk(
     "auth/register",
     async ({ user, pwd }, navigate , thunkAPI) => {
@@ -15,7 +14,7 @@ export const register = createAsyncThunk(
         console.log(response);
         console.log("response");
         thunkAPI.dispatch(setMessage(response.data.message));
-        
+          
         return response.data;
       } catch (error) {
         const message =
@@ -37,8 +36,10 @@ export const register = createAsyncThunk(
         console.log(user, pwd);
         const data = await AuthService.login({user, pwd});
         console.log("++++")
-        
-        
+        localStorage.setItem('user',user);
+
+        const user = JSON.parse(localStorage.getItem("user"));
+
         console.log("+++")
         navigate ("/Dashboard")
         return { user: data };

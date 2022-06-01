@@ -16,6 +16,7 @@ import Link from '@mui/material/Link';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { makeStyles } from "@material-ui/core/styles";
 import PrimarySearchAppBar from '../Header/AppBar';
+import ProfileAppBar from '../Dashboard/profileAppBar';
 import { useNavigate } from "react-router-dom";
 
 
@@ -106,7 +107,12 @@ export default function Album() {
   return (
 
     <ThemeProvider theme={theme}>
-      <PrimarySearchAppBar />
+      {localStorage.getItem('user') != undefined ? (
+        <ProfileAppBar/>
+      ) : (
+       < PrimarySearchAppBar />
+      )}
+      
       <CssBaseline />
       <main>
         {/* Hero unit */}
@@ -133,9 +139,10 @@ export default function Album() {
               direction="row"
               spacing={2}
               justifyContent="center"
-            >
-              <Button variant="contained" href="/JobberSignUp">Become a jobber</Button>
-              <Button onClick={() => navigate("/SignIn")} variant="outlined"> Post a job offer</Button>
+            >      {localStorage.getItem('user') == undefined ? (
+
+              <Button variant="contained" href="/JobberSignUp">Become a jobber</Button> ) : (
+              <Button onClick={() => navigate("/Post")} variant="outlined"> Post a job offer</Button>)}
             </Stack>
             <Typography variant="h4" align="left" color="text.secondary" paragraph>
               What service do you need ?

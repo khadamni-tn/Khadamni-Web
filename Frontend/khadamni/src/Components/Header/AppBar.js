@@ -165,7 +165,7 @@ export default function PrimarySearchAppBar() {
             component="div"
             sx={{ display: { xs: 'none', sm: 'block' } }}
           >
-            Khademni.tn
+            Khademni.tn 
           </Typography>
           <Search>
             <SearchIconWrapper>

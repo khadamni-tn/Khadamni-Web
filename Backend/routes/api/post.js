@@ -25,7 +25,7 @@ router.post("/", async (req, res) => {
     // if (false /*if not a job seeker*/) {
     //   return res.json({ message: "job seekers arent allowed to post" });
     // }
-    console.log("reached")
+    console.log(req.body.field)
     await Post.create({
       field: req.body.field,
       schedule: req.body.schedule,

@@ -57,9 +57,9 @@ import SignInStyle from './SignIn.module.css';
 const  handleSubmit = async () => {
     try {
     // setLoading(true);
+    localStorage.removeItem('user');
 
     
-        console.log("test")
           const response = await axios.post("http://localhost:3500/auth",
               { user, pwd },
               {
@@ -67,16 +67,17 @@ const  handleSubmit = async () => {
                   withCredentials: true
               }
           );
-          console.log(response)
+         
+
           
-  
   const accessToken = response.data.accessToken;
   const roles = response.data.roles;
-  
-  console.log(accessToken)
+ 
   
   if (accessToken != null) {
+    localStorage.setItem('user',user);
     
+
     navigate ("/Dashboard")    
     
   }

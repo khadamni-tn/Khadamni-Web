@@ -11,11 +11,16 @@ import { style } from "@mui/system";
 
 
 
+
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
 
 const SignUp = () => {
+
+
+
+
     const userRef = useRef();
     const errRef = useRef();
     const [successful, setSuccessful] = useState(false);
@@ -76,12 +81,18 @@ const SignUp = () => {
         dispatch(register(data, navigate))
             .unwrap()
             .then(() => {
+                
                 setSuccessful(true);
                 
             })
             .catch(() => {
+                setErrMsg("Username already used");
                 setSuccessful(false);
             });
+
+            
+       navigate ("/SignIn")
+
 
     };
 

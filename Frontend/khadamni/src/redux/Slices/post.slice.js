@@ -11,10 +11,10 @@ export const createPost = createAsyncThunk(
       try {
         console.log(field, location, schedule);
         const response = await postService.createPost(field, location, schedule);
-        console.log(response);
+        console.log(JSON.stringify(response));
         thunkAPI.dispatch(setMessage(response.data.message));
-        navigate("/Dashboard/posts")
-        return response.data;
+        
+        return JSON.stringify(response);
       } catch (error) {
         const message =
           (error.response &&

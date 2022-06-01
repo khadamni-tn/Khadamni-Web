@@ -11,6 +11,10 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+import HomeIcon from '@mui/icons-material/Home';
+import { SvgIcon } from '@mui/material';
+import { useNavigate, Link } from "react-router-dom";
+import ProfileAppBarCss from './profileAppBar.module.css'; 
 
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -30,15 +34,33 @@ const ProfileAppBar = () => {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
+  const handleCloseUserMenu = ( ) => {
+   
     setAnchorElUser(null);
   };
+  function handleUserMenu(setting) {
+    console.log(setting);
+    if(setting == "Logout"){
+      localStorage.removeItem("user");
+      navigate("/SignIn");
+    }
+
+    if(setting == "Dashboard"){
+      navigate("/Dashboard");
+    }
+
+   
+    
+
+  }
+  const navigate = useNavigate();
 
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Typography
+        <HomeIcon onClick={()=>{navigate("/")} } margin/>
+              <Typography
             variant="h6"
             noWrap
             component="div"
@@ -87,10 +109,19 @@ const ProfileAppBar = () => {
           >
             khadamn.tn
           </Typography>
+
+         
+          
+
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             
           </Box>
-
+          <div className={ProfileAppBarCss.user}>
+          <h4
+          >
+            Welcome {localStorage.getItem("user")}
+          </h4>
+          </div>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -114,7 +145,7 @@ const ProfileAppBar = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem key={setting} onClick={()=>handleUserMenu(setting)}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
